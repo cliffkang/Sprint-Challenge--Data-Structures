@@ -10,24 +10,52 @@ class LinkedList {
   // If there is one element in the list before the new element is added, the new element becomes the tail of the list
   // iterates over each item in the linked list
   each(cb) {
-
+    let node = this.head;
+    while (node !== null) {
+      cb(node.value);
+      node = node.next;
+    }
   }
 
   // gets the value of the node at the i-th index
   get(index) {
-
+    if (this.head === null) return;
+    let node = this.head;
+    let count = 0;
+    while (count <= index) {
+      if (count === index) return node.value;
+      count++;
+      node = node.next;
+    }
+    return;
   }
 
   // gets the number of nodes in the linked list
   get length() {
-
+    let node = this.head;
+    let count = 0;
+    while (node !== null) {
+      count++;
+      node = node.next;
+    }
+    return count;
   }
 
-  // sets
+  // at the given index, sets the value at that node
   set(index, value) {
-
+    if (this.head === null) this.addToTail(null);
+    let node = this.head;
+    let count = 0;
+    while (count <= index) {
+      if (count === index) {
+        node.value = value;
+        return;
+      }
+      count++;
+      if (node.next === null) this.addToTail(null);
+      node = node.next;
+    }
   }
-  
   addToTail(values) {
     const newNode = {
       next: null,
@@ -68,41 +96,41 @@ class LinkedList {
     return false;
   }
 }
-class LimitedArray {
-  constructor(limit) {
-    // You should not be directly accessing this array from your hash table methods
-    // Use the getter and setter methods included in this class to manipulate data in this class
-    this.storage = [];
-    this.limit = limit;
-  }
+// class LimitedArray {
+//   constructor(limit) {
+//     // You should not be directly accessing this array from your hash table methods
+//     // Use the getter and setter methods included in this class to manipulate data in this class
+//     this.storage = [];
+//     this.limit = limit;
+//   }
 
-  checkLimit(index) {
-    if (typeof index !== 'number') throw new Error('The supplied index needs to be a number');
-    if (this.limit <= index) {
-      throw new Error('The supplied index lies out of the array\'s bounds');
-    }
-  }
+//   checkLimit(index) {
+//     if (typeof index !== 'number') throw new Error('The supplied index needs to be a number');
+//     if (this.limit <= index) {
+//       throw new Error('The supplied index lies out of the array\'s bounds');
+//     }
+//   }
 
-  each(cb) {
-    for (let i = 0; i < this.storage.length; i++) {
-      cb(this.storage[i], i);
-    }
-  }
-  // Use this getter function to fetch elements from this class
-  get(index) {
-    this.checkLimit(index);
-    return this.storage[index];
-  }
+//   each(cb) {
+//     for (let i = 0; i < this.storage.length; i++) {
+//       cb(this.storage[i], i);
+//     }
+//   }
+//   // Use this getter function to fetch elements from this class
+//   get(index) {
+//     this.checkLimit(index);
+//     return this.storage[index];
+//   }
 
-  get length() {
-    return this.storage.length;
-  }
-  // Use this setter function to add elements to this class
-  set(index, value) {
-    this.checkLimit(index);
-    this.storage[index] = value;
-  }
-}
+//   get length() {
+//     return this.storage.length;
+//   }
+//   // Use this setter function to add elements to this class
+//   set(index, value) {
+//     this.checkLimit(index);
+//     this.storage[index] = value;
+//   }
+// }
 /* eslint-disable no-bitwise, operator-assignment */
 // This is hash function you'll be using to hash keys
 // There's some bit-shifting magic going on here, but essentially, all it is doing is performing the modulo operator
@@ -119,6 +147,6 @@ const getIndexBelowMax = (str, max) => {
 };
 
 module.exports = {
-  LimitedArray,
+  LinkedList,
   getIndexBelowMax,
 };
