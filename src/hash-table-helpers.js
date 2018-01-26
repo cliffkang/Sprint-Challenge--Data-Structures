@@ -25,6 +25,7 @@ class LinkedList {
     while (count <= index) {
       if (count === index) return node.value;
       count++;
+      if (node.next === null) this.addToTail([]);
       node = node.next;
     }
     return;
@@ -43,7 +44,7 @@ class LinkedList {
 
   // at the given index, sets the value at that node
   set(index, value) {
-    if (this.head === null) this.addToTail(null);
+    if (!this.head) this.addToTail([]);
     let node = this.head;
     let count = 0;
     while (count <= index) {
@@ -52,7 +53,7 @@ class LinkedList {
         return;
       }
       count++;
-      if (node.next === null) this.addToTail(null);
+      if (node.next === null) this.addToTail([]);
       node = node.next;
     }
   }
@@ -61,7 +62,7 @@ class LinkedList {
       next: null,
       value: values,
     };
-    if (this.head === null) {
+    if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
       return;
@@ -96,41 +97,7 @@ class LinkedList {
     return false;
   }
 }
-// class LimitedArray {
-//   constructor(limit) {
-//     // You should not be directly accessing this array from your hash table methods
-//     // Use the getter and setter methods included in this class to manipulate data in this class
-//     this.storage = [];
-//     this.limit = limit;
-//   }
 
-//   checkLimit(index) {
-//     if (typeof index !== 'number') throw new Error('The supplied index needs to be a number');
-//     if (this.limit <= index) {
-//       throw new Error('The supplied index lies out of the array\'s bounds');
-//     }
-//   }
-
-//   each(cb) {
-//     for (let i = 0; i < this.storage.length; i++) {
-//       cb(this.storage[i], i);
-//     }
-//   }
-//   // Use this getter function to fetch elements from this class
-//   get(index) {
-//     this.checkLimit(index);
-//     return this.storage[index];
-//   }
-
-//   get length() {
-//     return this.storage.length;
-//   }
-//   // Use this setter function to add elements to this class
-//   set(index, value) {
-//     this.checkLimit(index);
-//     this.storage[index] = value;
-//   }
-// }
 /* eslint-disable no-bitwise, operator-assignment */
 // This is hash function you'll be using to hash keys
 // There's some bit-shifting magic going on here, but essentially, all it is doing is performing the modulo operator

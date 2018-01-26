@@ -11,21 +11,9 @@ class HashTable {
 
   resize() {
     this.limit *= 2;
-    // const oldStorage = this.storage; //
-    // this.storage = new LinkedList(this.limit); //
-    // oldStorage.each((bucket) => { //
-    //   if (!bucket) return;
-    //   bucket.forEach((pair) => {
-    //     this.insert(pair[0], pair[1]); //
-    //   });
-    // });
   }
 
   capacityIsFull() {
-    // let fullCells = 0;
-    // this.storage.each((bucket) => { //
-    //   if (bucket !== undefined) fullCells++;
-    // });
     return this.storage.length / this.limit >= 0.75;
   }
 
@@ -65,7 +53,6 @@ class HashTable {
     if (bucket) {
       retrieved = bucket.filter(item => item[0] === key)[0];
     }
-
     return retrieved ? retrieved[1] : undefined;
   }
 }
